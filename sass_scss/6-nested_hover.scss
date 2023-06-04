@@ -1,0 +1,11 @@
+/* 6-nested_hover */
+
+// Set text color #FF0000 to button elements
+button {
+    color: #FF0000;
+
+    // Set text color #00FF00 when button elements are hovered
+    &:hover {
+        color: #00FF00;
+    }
+}

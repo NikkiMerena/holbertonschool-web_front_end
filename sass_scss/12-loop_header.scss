@@ -1,0 +1,10 @@
+/* 12-loop_header.scss */
+
+// Loop from 1 through 5 to generate H* tags
+@for $i from 1 through 5 {
+    // Generate the selector for H* tags based on the current iteration
+    h#{$i} {
+      // Set the font size of the H* tags to the current iteration number in pixels
+      font-size: #{$i}px;
+    }
+  }

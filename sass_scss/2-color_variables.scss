@@ -1,0 +1,23 @@
+/* 2-color-_variables */
+
+// Define a variable for text color
+$text_color: #3D3D3D;
+
+// Define a variable for background color
+$bg_color: #6D6D6D;
+
+// Apply the text color variable to the body element
+body {
+    color: $text_color;
+    background-color: $bg_color;
+}
+
+// Apply the text color variable to the paragraph elements
+p {
+    color: $text_color;
+}
+
+// Apply the background color variable to the h2 elements
+h2 {
+    background-color: $bg_color;
+}

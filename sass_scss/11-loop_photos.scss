@@ -1,0 +1,13 @@
+/* 11-loop_photos */
+
+// Import the sass file '11-photos'
+@import '11-photos';
+
+// Loop through each name in the $list_names list
+@each $name in $list-names {
+    // Generate a class selector based on the name
+    .photo-#{$name} {
+        // Set the background image using the name & image-url function
+        background: image-url("photos/#{$name}.jpg") no-repeat;
+    }
+}

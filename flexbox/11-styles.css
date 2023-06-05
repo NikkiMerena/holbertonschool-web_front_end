@@ -395,7 +395,7 @@
     .section-about-us [class*='col-'] {
         align-self: center;
     }
-    
+
   /*** 4. CARD ***/
   
   /* Card (all styles)
@@ -543,15 +543,14 @@
     z-index: 0;
   }
 
-.hero-article .section-inner {
+  .hero-article .section-inner {
     text-align: center;
     align-items: center;
     min-height: 40vh;
-}
+  }
 
-.hero-article .section-body {
+  .hero-article .section-body {
     position: relative;
     padding: 7rem 0 0;
     z-index: 2;
-}
-    
+  }

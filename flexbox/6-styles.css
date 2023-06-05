@@ -216,7 +216,7 @@
   }
 
   .nav .nav-item + .nav-item {
-    margin: var(--nav-item-letter-spacing);
+    margin: var(--nav-item-margin);
   }
   
   .nav .nav-link {

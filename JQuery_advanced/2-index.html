@@ -13,29 +13,28 @@
     <script type="application/javascript">
         function createFamilyTree() {
             // Define a function named createFamilyTree
-            
-            var tableHtml = '<table>' +
-                '<thead>' +
-                '<tr>' +
-                '<th>Firstname</th>' +
-                '<th>Lastname</th>' +
-                '</tr>' +
-                '</thead>' +
-                '<tbody>' +
-                '<tr>' +
-                '<td>Guillaume</td>' +
-                '<td>Salva</td>' +
-                '</tr>' +
-                '<tr>' +
-                '<td>Paulette</td>' +
-                '<td>Salva</td>' +
-                '</tr>' +
-                '<tr>' +
-                '<td>Antoine</td>' +
-                '<td>Salva</td>' +
-                '</tr>' +
-                '</tbody>' +
-                '</table>';
+            var tableHtml = `<table>
+                <thead>
+                        <tr>
+                                <th>Firstname</th>
+                                <th>Lastname</th>
+                        </tr>
+                </thead>
+                <tbody>
+                        <tr>
+                                <td>Guillaume</td>
+                                <td>Salva</td>
+                        </tr>
+                        <tr>
+                                <td>Paulette</td>
+                                <td>Salva</td>
+                        </tr>
+                        <tr>
+                                <td>Antoine</td>
+                                <td>Salva</td>
+                        </tr>
+                </tbody>
+        </table>`
             // Create an HTML string representing the table structure and data
             
             $("body").append(tableHtml);

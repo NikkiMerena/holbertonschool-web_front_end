@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Task 4</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+    integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+    <!-- Include jQuery library from CDN with integrity and crossorigin attributes -->
+</head>
+
+<body>
+    <script type="application/javascript">
+        function createFamilyTree() {
+            // Define a function named createFamilyTree
+            
+            $("body").append(
+                // Append to the body of the page
+                
+                $("<table>").append(
+                    // Create and append a <table> element
+                    
+                    $("<thead>").append(
+                        // Create and append a <thead> element
+                        
+                        $("<tr>").append(
+                            // Create and append a <tr> element for the table header row
+                            
+                            $("<th>").text("Firstname"),
+                            // Create and append a <th> element with the text "Firstname"
+                            
+                            $("<th>").text("Lastname")
+                            // Create and append a <th> element with the text "Lastname"
+                        )
+                    ),
+                    
+                    $("<tbody>").append(
+                        // Create and append a <tbody> element
+                        
+                        $("<tr>").append(
+                            // Create and append a <tr> element for the table row
+                            
+                            $("<td>").text("Guillaume"),
+                            // Create and append a <td> element with the text "Guillaume"
+                            
+                            $("<td>").text("Salva")
+                            // Create and append a <td> element with the text "Salva"
+                        ),
+                        
+                        $("<tr>").append(
+                            // Create and append a <tr> element for the table row
+                            
+                            $("<td>").text("Paulette"),
+                            // Create and append a <td> element with the text "Paulette"
+                            
+                            $("<td>").text("Salva")
+                            // Create and append a <td> element with the text "Salva"
+                        ),
+                        
+                        $("<tr>").append(
+                            // Create and append a <tr> element for the table row
+                            
+                            $("<td>").text("Antoine"),
+                            // Create and append a <td> element with the text "Antoine"
+                            
+                            $("<td>").text("Salva")
+                            // Create and append a <td> element with the text "Salva"
+                        )
+                    )
+                )
+            );
+        }
+
+        function replaceFamilyTree() {
+            // Define a function named replaceFamilyTree
+            
+            var newTr = $("<tr>").append(
+                // Create a new <tr> element and append to the variable newTr
+                
+                $("<td>").text("Gerard"),
+                // Create and append a <td> element with the text "Gerard"
+                
+                $("<td>").text("Bonissa")
+                // Create and append a <td> element with the text "Bonissa"
+            );
+
+            $("tbody").html(newTr);
+            // Replace the content of the <tbody> element with the newTr variable using the html method
+        }
+
+        $(document).ready(function () {
+            // Execute the following code when the document is ready
+            
+            createFamilyTree();
+            // Call the createFamilyTree function
+            
+            replaceFamilyTree();
+            // Call the replaceFamilyTree function
+        });
+    </script>
+</body>
+
+</html>

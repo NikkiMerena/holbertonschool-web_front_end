@@ -13,7 +13,7 @@
     <!-- Define CSS styles -->
     <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
     integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
-    <!-- Include jQuery library from CDN with integrity and crossorigin attributes -->
+    <!-- Include jQuery library from CDN -->
 </head>
 
 <body>
@@ -94,6 +94,20 @@
             addNewMember("Victor", "Salva");
             // Call the addNewMember function with firstName "Victor" and lastName "Salva"
         });
+
+        // Additional code to handle click, css, and remove functionality
+        $(document).on("click", "td.remove", function () {
+            // Attach a click event listener to all existing and future "td.remove" elements
+            $(this).parent().remove();
+            // Within the click event handler, remove the parent row (<tr>) of the clicked element
+        });
+
+        $("td.remove").css({
+            // Select all "td.remove" elements
+            "background-color": "orange",
+            "cursor": "pointer"
+        });
+        // Apply CSS styles to the selected elements
     </script>
 </body>
 

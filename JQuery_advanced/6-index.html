@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Task 6</title>
+    <style>
+        td.remove {
+            background-color: orange;
+            cursor: pointer;
+        }
+    </style>
+    <!-- Define CSS styles -->
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+    <!-- Include jQuery library from CDN -->
+</head>
+
+<body>
+    <script type="application/javascript">
+        function createFamilyTree() {
+            // Define a function named createFamilyTree
+            $("body").append(
+                // Append to the body of the page
+                $("<table>").append(
+                    // Create and append a <table> element
+                    $("<thead>").append(
+                        // Create and append a <thead> element
+                        $("<tr>").append(
+                            // Create and append a <tr> element for the table header row
+                            $("<th>").text("Firstname"),
+                            // Create and append a <th> element with the text "Firstname"
+                            $("<th>").text("Lastname")
+                            // Create and append a <th> element with the text "Lastname"
+                        )
+                    ),
+                    $("<tbody>")
+                    // Create and append an empty <tbody> element
+                )
+            );
+        }
+
+        function addNewMember(firstName, lastName, position) {
+            // Define a function named addNewMember that accepts firstName, lastName, and position as arguments
+            var row = $("<tr>").append(
+                // Create a new <tr> element and append to the variable row
+                $("<td>").text(firstName),
+                // Create and append a <td> element with the text equal to the firstName argument
+                $("<td>").text(lastName),
+                // Create and append a <td> element with the text equal to the lastName argument
+                $("<td>").text("(x)").addClass("remove").click(function () {
+                    // Create and append a <td> element with the text "(x)"
+                    // Add the "remove" class to the element
+                    // Attach a click event listener to the element
+                    $(this).parent().remove();
+                    // Within the click event handler, remove the parent row (<tr>) of the clicked element
+                })
+            );
+
+            if (position === "before") {
+                $("tbody").prepend(row);
+                // Prepend the row to the <tbody> element (add at the top)
+            } else {
+                $("tbody").append(row);
+                // Append the row to the <tbody> element (add at the bottom)
+            }
+        }
+
+        function createForm() {
+            // Define a function named createForm
+            $("<input>").attr("type", "text").insertBefore("table");
+            // Insert an <input> element of type text before the <table> element
+            $("<input>").attr("type", "text").insertBefore("table");
+            // Insert an <input> element of type text before the <table> element
+            $("<select>").append(
+                // Create and append a <select> element
+                $("<option>").val("before").text("Before"),
+                // Create and append an <option> element with value "before" and text "Before"
+                $("<option>").val("after").text("After")
+                // Create and append an <option> element with value "after" and text "After"
+            ).insertBefore("table");
+            // Insert the <select> element before the <table> element
+            $("<input>").attr("type", "submit").click(function (event) {
+                // Create and append an <input> element of type submit
+                event.preventDefault();
+                // Prevent the default form submission behavior
+
+                var firstName = $("input[type=text]:nth-of-type(1)").val(),
+                    // Get the value of the first input element
+                    lastName = $("input[type=text]:nth-of-type(2)").val(),
+                    // Get the value of the second input element
+                    position = $("select").val();
+                // Get the value of the select element
+
+                addNewMember(firstName, lastName, position);
+                // Call the addNewMember function with the obtained values
+            }).insertBefore("table");
+            // Insert the <input> element before the <table> element
+        }
+
+        $(document).ready(function () {
+            // Execute the following code when the document is ready
+            createFamilyTree();
+            // Call the createFamilyTree function to create the table structure
+            createForm();
+            // Call the createForm function to create the form elements
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Task 5</title>
+    <style>
+        td.remove {
+            background-color: orange;
+            cursor: pointer;
+        }
+    </style>
+    <!-- Define CSS styles -->
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+    integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+    <!-- Include jQuery library from CDN with integrity and crossorigin attributes -->
+</head>
+
+<body>
+    <script type="application/javascript">
+        function createFamilyTree() {
+            // Define a function named createFamilyTree
+            
+            $("body").append(
+                // Append to the body of the page
+                
+                $("<table>").append(
+                    // Create and append a <table> element
+                    
+                    $("<thead>").append(
+                        // Create and append a <thead> element
+                        
+                        $("<tr>").append(
+                            // Create and append a <tr> element for the table header row
+                            
+                            $("<th>").text("Firstname"),
+                            // Create and append a <th> element with the text "Firstname"
+                            
+                            $("<th>").text("Lastname")
+                            // Create and append a <th> element with the text "Lastname"
+                        )
+                    ),
+                    
+                    $("<tbody>")
+                    // Create and append an empty <tbody> element
+                )
+            );
+        }
+
+        function addNewMember(firstName, lastName) {
+            // Define a function named addNewMember that accepts firstName and lastName as arguments
+            
+            var row = $("<tr>").append(
+                // Create a new <tr> element and append to the variable row
+                
+                $("<td>").text(firstName),
+                // Create and append a <td> element with the text equal to the firstName argument
+                
+                $("<td>").text(lastName),
+                // Create and append a <td> element with the text equal to the lastName argument
+                
+                $("<td>").text("(x)").addClass("remove").click(function () {
+                    // Create and append a <td> element with the text "(x)"
+                    // Add the "remove" class to the element
+                    // Attach a click event listener to the element
+                    
+                    $(this).parent().remove();
+                    // Within the click event handler, remove the parent row (<tr>) of the clicked element
+                })
+            );
+
+            $("tbody").append(row);
+            // Append the row to the <tbody> element
+        }
+
+        $(document).ready(function () {
+            // Execute the following code when the document is ready
+            
+            createFamilyTree();
+            // Call the createFamilyTree function to create the table structure
+            
+            addNewMember("Guillaume", "Salva");
+            // Call the addNewMember function with firstName "Guillaume" and lastName "Salva"
+            
+            addNewMember("Arielle", "Snizt");
+            // Call the addNewMember function with firstName "Arielle" and lastName "Snizt"
+            
+            addNewMember("Fanette", "Snizt");
+            // Call the addNewMember function with firstName "Fanette" and lastName "Snizt"
+            
+            addNewMember("Gerard", "Snizt");
+            // Call the addNewMember function with firstName "Gerard" and lastName "Snizt"
+            
+            addNewMember("Victor", "Salva");
+            // Call the addNewMember function with firstName "Victor" and lastName "Salva"
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Task 7</title>
+    <style>
+        td.remove {
+            background-color: orange;
+            cursor: pointer;
+        }
+    </style>
+    <!-- Define CSS styles -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Include jQuery library from CDN -->
+    <script type="application/javascript">
+        function createSearchForm() {
+            // Define a function named createSearchForm
+            $("body").append(
+                // Append to the body of the page
+                $("<form>").submit(function (event) {
+                    // Create a form element and attach a submit event listener
+                    event.preventDefault();
+                    // Prevent the default form submission behavior
+                    var searchText = $("input[type=text]").val();
+                    // Get the value of the text input
+                    queryWikipedia(searchText);
+                    // Call the queryWikipedia function with the search text
+                }).append(
+                    // Append elements to the form
+                    $("<input>").attr("type", "text"),
+                    // Create a text input element
+                    $("<input>").attr("type", "submit").val("Search"),
+                    // Create a submit input element with the value "Search"
+                    $("<ul>")
+                    // Create an empty unordered list element
+                )
+            );
+        }
+
+        function addNewArticle(id, title, snippet) {
+            // Define a function named addNewArticle that accepts id, title, and snippet as arguments
+            var listItem = $("<li>").append(
+                // Create a list item element and append
+                $("<p>").append(
+                    // Create a paragraph element and append
+                    $("<span>").text(id + " - "),
+                    // Create a span element with the ID text
+                    $("<b>").text(title)
+                    // Create a bold element with the title text
+                ),
+                $("<p>").text(snippet)
+                // Create a paragraph element with the snippet text
+            );
+            $("ul").append(listItem);
+            // Append the list item to the unordered list
+        }
+
+        function queryWikipedia(search) {
+            // Define a function named queryWikipedia that accepts search as an argument
+            var url = "https://en.wikipedia.org/w/api.php";
+            // Define the Wikipedia API URL
+            var params = {
+                action: "query",
+                list: "search",
+                srsearch: search,
+                format: "json",
+                origin: '*',
+            };
+            // Define the parameters for the API request
+
+            $.ajax({
+                url: url,
+                data: params,
+                dataType: "jsonp",
+                success: function (data) {
+                    // Perform an AJAX request to the Wikipedia API
+                    var results = data.query.search;
+                    // Get the search results from the API response
+                    results.forEach(function (result) {
+                        // Iterate over each result
+                        addNewArticle(result.pageid, result.title, result.snippet);
+                        // Call the addNewArticle function with the result's pageid, title, and snippet
+                    });
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            // Execute the following code when the document is ready
+            createSearchForm();
+            // Call the createSearchForm function to create the search form
+        });
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>

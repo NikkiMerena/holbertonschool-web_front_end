@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 0</title>
+</head>
+<body>
+    <h1>Login to the website</h1>
+    <input type="text" id="firstname" placeholder="First Name">
+    <input type="text" id="email" placeholder="Email">
+    <button onclick="setCookies()">Log me in</button>
+    <h1>Cookies</h1>
+    <button onclick="showCookies()">Show the cookies</button>
+
+    <script>
+        // Function to set the cookies
+        function setCookies() {
+  var firstnameInput = document.getElementById('firstname');
+  var emailInput = document.getElementById('email');
+  
+  var firstname = firstnameInput.value;
+  var email = emailInput.value;
+  
+  var expirationDate = new Date();
+  expirationDate.setDate(expirationDate.getDate() + 10); // Set expiration date to 10 days from now
+  
+  document.cookie = "firstname=" + firstname + "; expires=" + expirationDate.toUTCString() + "; path=/";
+  document.cookie = "email=" + email + "; expires=" + expirationDate.toUTCString() + "; path=/";
+}
+
+        // Function to show the cookies
+        function showCookies() {
+            // Remove any previously shown cookie paragraph element
+            let oldCookie = document.getElementById("shown-cookies");
+            if (oldCookie) {
+                oldCookie.remove();
+            }
+            
+            let val = [];
+            // Split the cookies string into an array of key-value pairs
+            let keyVals = document.cookie.split(";");
+            for (let i in keyVals) {
+                // Extract the values from each key-value pair and add them to the 'val' array
+                val.push(keyVals[i].split("=")[1]);
+            }
+            
+            // Create a new paragraph element
+            let pTag = document.createElement("p");
+            pTag.setAttribute('id','shown-cookies');
+            // Set the inner text of the paragraph to display the cookie values
+            pTag.innerText = `Cookies: ${val[0]}, ${val[1]}`;
+            // Append the paragraph element to the body of the document
+            document.body.appendChild(pTag);
+        }
+    </script>
+</body>
+</html>

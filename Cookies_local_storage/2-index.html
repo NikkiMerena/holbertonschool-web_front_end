@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 2</title>
+</head>
+
+<body>
+    <h1>Login to the website</h1>
+    <input type="text" id="firstname" placeholder="First Name">
+    <input type="text" id="email" placeholder="Email">
+    <button onclick="setCookies()">Log me in</button>
+    <h1>Cookies</h1>
+    <button onclick="showCookies()">Show the cookies</button>
+
+    <script>
+        function setCookies() {
+            let expires = new Date(
+                Date.now() +
+                10 * // 10 days
+                24 * // Hour in a day
+                60 * // Minute in a hour 
+                60 * // Seconds in a minute 
+                1000  // second in miliseconds 
+            );
+            document.cookie = `firstname=${document.getElementById('firstname').value}; expires=${expires.toGMTString()}`;
+            document.cookie = `email=${document.getElementById('email').value}; expires=${expires.toGMTString()}`;
+        }
+
+        function showCookies() {
+            let oldCookie = document.getElementById("shown-cookies");
+            if (oldCookie) {
+                oldCookie.remove();
+            }
+            let pTag = document.createElement("p");
+            pTag.setAttribute('id','shown-cookies')
+            pTag.innerText = `Email: ${getCookie('email')} - Firstname: ${getCookie('firstname')}`;
+            document.body.appendChild(pTag);
+        }
+
+        function getCookie(name) {
+            {
+                let keyVals = document.cookie.split("; ");
+                for (let i in keyVals) {
+                    let kv = keyVals[i].split("=");
+                    if (kv[0] == name) return kv[1];
+                }
+                return "";
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>

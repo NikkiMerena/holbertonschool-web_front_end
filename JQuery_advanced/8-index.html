@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>Task 8</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Include jQuery library from CDN -->
+</head>
+
+<body>
+    <script type="application/javascript">
+        function createSearchForm() {
+            // Define a function named createSearchForm
+            $('body').append([
+                // Append to the body of the page
+                $('<input/>', { type: 'text' }),
+                // Create an input element of type text
+                $('<input/>', {
+                    type: 'submit',
+                    on: {
+                        click: function () {
+                            // Create an input element of type submit with a click event listener
+                            queryWikipedia($('input:nth-of-type(1)').val());
+                            // Call the queryWikipedia function with the value of the first input element
+                        }
+                    }
+                }),
+                $('<ul/>', { class: 'results' }),
+                // Create an unordered list element with the class "results"
+                $('<ul/>', { id: 'pagination' })
+                // Create an unordered list element with the id "pagination"
+            ]);
+        }
+
+        function addNewArticle(id, title, snippet) {
+            // Define a function named addNewArticle that accepts id, title, and snippet as arguments
+            $('ul').append(
+                // Append to the unordered list in the DOM
+                $('<li/>').append([
+                    // Create a list item element and append
+                    $('<p/>').append([
+                        // Create a paragraph element and append
+                        $('<span/>', { text: `${id} - ` }),
+                        // Create a span element with the ID text
+                        $('<b/>', { text: title })
+                        // Create a bold element with the title text
+                    ]),
+                    $('<p/>', { html: snippet })
+                    // Create a paragraph element with the snippet as HTML content
+                ])
+            )
+        }
+
+        function queryWikipedia(search, offset = 0) {
+            // Define a function named queryWikipedia that accepts search and offset as arguments
+            $.ajax({
+                // Perform an AJAX request
+                url: "https://en.wikipedia.org/w/api.php" + '?origin=*',
+                // Set the URL to the Wikipedia API
+                data: {
+                    // Set the data parameters for the API request
+                    action: 'query',
+                    format: 'json',
+                    list: 'search',
+                    srsearch: search,
+                    sroffset: offset
+                },
+                method: "GET",
+                dataType: "json",
+                success: function (json) {
+                    // If the AJAX request is successful
+                    $('.results').replaceWith($('<ul/>', { class: 'results' }));
+                    // Replace the existing results list with a new empty one
+                    $.each(json.query.search, function (index, result) {
+                        // Iterate over each search result
+                        addNewArticle(result.pageid, result.title, result.snippet)
+                        // Call the addNewArticle function with the result's pageid, title, and snippet
+                    });
+                    buildPagination(json.query.searchinfo.totalhits, 10, offset + 1);
+                    // Call the buildPagination function with the total number of hits, items per page, and current offset
+                },
+                error: function (xhr, status, errorThrown) {
+                    // If an error occurs during the AJAX request
+                    alert("Something went wrong!");
+                    console.log(`Error: ${error}`);
+                    console.log(`Status: ${status}`);
+                    console.dir(xhr);
+                }
+            })
+        }
+
+        function buildPagination(numberOfItems, itemsPerPage, currentOffset) {
+            // Define a function named buildPagination that accepts numberOfItems, itemsPerPage, and currentOffset as arguments
+            $('#pagination').replaceWith($('<ul/>', { id: 'pagination' }));
+            // Replace the existing pagination list with a new empty one
+            for (i = 0; i < (numberOfItems / itemsPerPage); i++) {
+                // Loop based on the number of pages
+                let item = $('<li/>', {
+                    // Create a list item element
+                    text: i + 1,
+                    // Set the text of the item to the page number
+                    css: { cursor: 'pointer', marginLeft: '10px', display: 'inline' },
+                    // Apply CSS styles to the item
+                    on: {
+                        click: function () {
+                            // Attach a click event listener to the item
+                            queryWikipedia($('input:nth-of-type(1)').val(), (parseInt(this.textContent) - 1));
+                            // Call the queryWikipedia function with the search value and the clicked page offset
+                        }
+                    }
+                });
+
+                if (i + 1 === currentOffset) {
+                    // If the current page matches the currentOffset
+                    item.css({ fontWeight: 'bold' })
+                    // Apply additional CSS styles to highlight the current page
+                }
+
+                $('#pagination').append(item);
+                // Append the item to the pagination list
+            }
+        }
+
+        $(document).ready(function () {
+            // Execute the following code when the document is ready
+            createSearchForm();
+            // Call the createSearchForm function to create the search form
+        });
+    </script>
+
+</body>
+
+</html>

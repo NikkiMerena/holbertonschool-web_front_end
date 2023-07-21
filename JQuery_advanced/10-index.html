@@ -1,52 +1,45 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
-<head>
-    <meta charset="utf-8" />
-    <title>Task 10</title>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
-        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-    <!-- Include jQuery library from CDN -->
-</head>
+    <head>
 
-<body>
-    <script type="application/javascript">
-        function addPostRow(data) {
-            // Define a function named addPostRow that accepts data as an argument
-            $("body").append(
-                // Append to the body of the page
-                $("<p>").append(
-                    // Create and append a <p> element
-                    $("<span>").text("Post created with id " + data.ID + ", title: " + data.TITLE + ", author: " + data.AUTHOR)
-                    // Create and append a <span> element with the text containing the post details
-                )
-            );
-        }
+        <meta charset="utf-8" />
+        <title>Task 10</title>
+        <link rel="icon" type="image/ico" href="https://intranet.hbtn.io/favicon_black.ico">
+        <script
+            src="https://code.jquery.com/jquery-3.7.0.min.js"
+            integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+            crossorigin="anonymous"></script>
 
-        function listPosts() {
-            // Define a function named listPosts
-            $.get("http://localhost:3000/posts", function (data, status) {
-                // Perform a GET request to the local server's posts endpoint
-                if (status === "success") {
-                    // If the server returns a successful response
-                    data.forEach(function (post) {
-                        // Iterate over each element in the response
+    </head>
+
+    <body>
+        <script type="application/javascript">
+            function addPostRow(data) {
+                let postInfo = `Post created with id ${data.id}, title: ${data.title}, author: ${data.author}`;
+                let paragraph = $('<p>').append(
+                    $('<span>').text(postInfo)
+                );
+
+                $('body').append(paragraph);
+            }
+
+            function listPosts() {
+                $.get('http://localhost:3000/posts', function(response) {
+                    response.forEach(function(post) {
                         addPostRow(post);
-                        // Call the addPostRow function with the post data
-                    });
-                } else {
-                    // If the server is unavailable
-                    alert("Server Error");
-                }
-            });
-        }
+                    })
+                })
 
-        $(document).ready(function () {
-            // Execute the following code when the document is ready
+                .fail(function() {
+                    alert('Server Error');
+                })
+            }
+
+        $(document).ready(function() {
             listPosts();
-            // Call the listPosts function to query and display the posts
         });
-    </script>
-</body>
+        </script>
+    </body>
 
 </html>
